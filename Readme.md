@@ -950,7 +950,7 @@ API Collection
 
  ## 👨‍💻 Author
 
- **Your Name**
+ **Abdul Hafeez**
 
  Backend Developer
 
