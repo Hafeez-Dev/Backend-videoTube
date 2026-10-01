@@ -21,7 +21,7 @@ const getVideoComments = asynHandler(async (req, res) => {
         throw new ApiError(404, "video not found!")
     }
 
-    const getComments = await Comment.aggregate([
+    const commentsAggregate = Comment.aggregate([
         {
             $match: { video: new mongoose.Types.ObjectId(videoId)}
         },
@@ -79,7 +79,7 @@ const getVideoComments = asynHandler(async (req, res) => {
         limit: parseInt(limit, 10)
     }
 
-    const comments = await Comment.aggregatePaginate(getComments, options)
+    const comments = await Comment.aggregatePaginate(commentsAggregate, options)
 
     return res
     .status(200)
@@ -98,7 +98,7 @@ const addComment = asynHandler(async (req, res) => {
         throw new ApiError(400, "Invalid videoId!")
     }
 
-    if(!content?.trim() == "") {
+    if(!content?.trim()) {
         throw new ApiError(400, "Comment content required!")
     }
 
@@ -125,7 +125,7 @@ const updateComment = asynHandler(async (req, res) => {
     const { commentId } = req.params
     const { content } = req.body
 
-    if(!content?.trim() == "") {
+    if(!content?.trim()) {
         throw new ApiError(400, "Comment content required!")
     }
 
@@ -151,14 +151,14 @@ const updateComment = asynHandler(async (req, res) => {
         }
     )
 
-    if(!updateComment) {
+    if(!updatedComment) {
         throw new ApiError(500, "failed to update, try again")
     }
 
     return res
     .status(200)
     .json(
-        new ApiResponse(200, updateComment, "comment updated successfully!")
+        new ApiResponse(200, updatedComment, "comment updated successfully!")
     )
 
 })
