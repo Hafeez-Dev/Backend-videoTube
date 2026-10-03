@@ -1,11 +1,15 @@
 {
   "name": "backend-project",
   "version": "1.0.0",
-  "description": "a backend series building backend project :)",
+  "description": "a videoTube backend project :)",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "start": "node src/server.js",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:watch": "vitest --watch"
   },
   "keywords": [
     "javascript",
@@ -16,8 +20,11 @@
   "author": "debugcodez",
   "license": "ISC",
   "devDependencies": {
+    "mongodb-memory-server": "^11.3.0",
     "nodemon": "^3.1.14",
-    "prettier": "^3.9.5"
+    "prettier": "^3.9.5",
+    "supertest": "^7.3.0",
+    "vitest": "^5.0.3"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
